@@ -1,6 +1,6 @@
 ---
 title: "The Puppet Master — OSINT Challenge Write-up"
-thumbnail: "/assets/img/thumbnail/empty.jpg"
+thumbnail: "/assets/img/writeups/puppet-master/bushmaster-front-view.jpg"
 layout: page
 permalink: /Write-ups/the-puppet-master.html
 ---
@@ -20,11 +20,9 @@ The scenario frames the player as an analyst reviewing evidence submitted by a f
 
 ![Investigation platform evidence page](/assets/img/writeups/puppet-master/evidence-page.png)
 _Caption (EN): The evidence page as presented on the investigation platform._
-_التعليق (AR): واجهة الدليل كما تظهر في منصة التحقيق._
 
 ![Evidence assessment / dashboard](/assets/img/writeups/puppet-master/evidence-assessment.png)
 _Caption (EN): The platform's evidence assessment view, listing confirmed visual elements and the investigation vectors required to solve the challenge._
-_التعليق (AR): واجهة تقييم الأدلة في المنصة، تعرض العناصر البصرية المؤكدة ومحاور التحقيق المطلوبة لحل التحدي._
 
 ---
 
@@ -38,8 +36,7 @@ This challenge has no technical exploitation component, so the approach below is
 4. **Reconcile details into the answer format.** Combine the confirmed, cross-checked facts into whatever structured format the challenge requests.
 
 ![Evidence photo — confirmed vehicle](/assets/img/writeups/puppet-master/bushmaster-front-view.jpg)
-_Caption (EN): The evidence photo used as the starting point for the reverse-image search._
-_التعليق (AR): صورة الدليل التي استُخدمت كنقطة انطلاق للبحث العكسي بالصور._
+**The evidence photo used as the starting point for the reverse-image search.**
 
 ---
 
@@ -53,17 +50,14 @@ _التعليق (AR): صورة الدليل التي استُخدمت كنقطة
 
 ![Wikipedia infobox reference](/assets/img/writeups/puppet-master/wikipedia-infobox.png)
 _Caption (EN): Public reference entry confirming the vehicle's identity and service history._
-_التعليق (AR): مصدر عام يؤكد هوية العربة وتاريخ خدمتها._
 
 ### 3.1 Supporting Cross-References
 
 ![NZ Army official equipment page](/assets/img/writeups/puppet-master/nzarmy-bushmaster-page.jpg)
 _Caption (EN): An operator's official equipment page (New Zealand Army) describing the same vehicle in public service._
-_التعليق (AR): صفحة رسمية لمعدات إحدى الجهات المشغّلة (الجيش النيوزيلندي) تصف نفس العربة أثناء الخدمة الفعلية._
 
 ![Public specifications reference](/assets/img/writeups/puppet-master/wikipedia-specs-table.png)
 _Caption (EN): Publicly documented technical specifications used to cross-check the identification._
-_التعليق (AR): مواصفات فنية موثّقة بشكل عام استُخدمت للتحقق من صحة التعريف._
 
 ---
 
@@ -71,13 +65,13 @@ _التعليق (AR): مواصفات فنية موثّقة بشكل عام اس�
 
 This is a conceptual description of the artifact type used in the challenge, not a reproduction of any real leaked or sensitive dataset:
 
-| Field | Description |
-|---|---|
-| `asset_type` | General category of the object shown (e.g., wheeled armored vehicle) |
-| `visual_markers` | Distinguishing features used for identification (hull geometry, wheel count, mounts, paint scheme) |
-| `environment_context` | Setting of the photo (terrain, lighting, apparent purpose — training vs. operational) |
-| `candidate_matches` | Shortlist of publicly documented equipment types resembling the asset |
-| `confirmed_identity` | The single candidate supported by consistent cross-referenced sources |
+| Field                  | Description                                                                                                      |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `asset_type`           | General category of the object shown (e.g., wheeled armored vehicle)                                             |
+| `visual_markers`       | Distinguishing features used for identification (hull geometry, wheel count, mounts, paint scheme)               |
+| `environment_context`  | Setting of the photo (terrain, lighting, apparent purpose — training vs. operational)                            |
+| `candidate_matches`    | Shortlist of publicly documented equipment types resembling the asset                                            |
+| `confirmed_identity`   | The single candidate supported by consistent cross-referenced sources                                            |
 | `specification_fields` | Publicly published technical facts about the confirmed identity (origin, manufacturer, era of service, capacity) |
 
 No private, personal, or sensitive data is involved anywhere in this challenge — every fact used to solve it is drawn from openly published, public-domain reference material.
@@ -97,8 +91,7 @@ Rather than walking through the specific answer, here's the reasoning pattern th
 ## 6. Completion Confirmation
 
 ![Challenge solved confirmation](/assets/img/writeups/puppet-master/pwned-success.png)
-_Caption (EN): "The Puppet Master has been Pwned" — confirmation screen after submitting the correct flag._
-_التعليق (AR): "تم تنفيذ Pwned لتحدي The Puppet Master" — شاشة التأكيد بعد تسليم الفلاج الصحيح._
+"The Puppet Master has been Pwned" — confirmation screen after submitting the correct flag.\_
 
 ---
 
