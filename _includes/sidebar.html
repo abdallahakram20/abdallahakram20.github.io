@@ -57,7 +57,54 @@
     </a>
   </div>
   <div class="side-info">
-    {% include navigation.html %}
+    <nav id="navigation">
+      <ul class="nav-list">
+        <li id="nav-home" aria-label="Home">
+          <div class="nav-item nav-home-item">
+            <a
+              href="{{ '/' | prepend: site.baseurl }}"
+              class="nav-list-link nav-lh"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                <path
+                  d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112-.3a16 16 0 0 0 16-15.7V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v96.1a16 16 0 0 0 16 15.7l112 .3a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.54V44a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43.13c-36.7-29.4-88.6-29.4-125.3 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31a12 12 0 0 0 16.9 1.6L64 270.69V464a48 48 0 0 0 48 48h368a48 48 0 0 0 48-48V270.69l18.9 15.3a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.92z"
+                />
+              </svg>
+              <span>Home</span>
+            </a>
+          </div>
+        </li>
+
+        <li class="nav-section" aria-label="Pages">
+          <div class="nav-section-title">Pages</div>
+          <ul class="nav-list nav-pages-list">
+            {%- assign writeup_pages = site.pages | where_exp: "p", "p.path
+            contains '_pages/Write-ups/' and p.path !=
+            '_pages/Write-ups/index.md'" -%} {%- assign writeup_pages =
+            writeup_pages | sort: 'title' -%} {%- for p in writeup_pages -%} {%-
+            assign page_title = p.title | default: p.path -%} {%- assign
+            page_title = page_title | remove: '_pages/Write-ups/' | remove:
+            '.md' -%}
+            <li class="nav-page-item" aria-label="{{ page_title }}">
+              <div class="nav-item">
+                <a
+                  href="{{ p.url | prepend: site.baseurl }}"
+                  class="nav-list-link nav-sh"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                    <path
+                      d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"
+                    />
+                  </svg>
+                  <span>{{ page_title }}</span>
+                </a>
+              </div>
+            </li>
+            {%- endfor -%}
+          </ul>
+        </li>
+      </ul>
+    </nav>
     <div id="contact">
       <hr />
       <h3>Contact</h3>
