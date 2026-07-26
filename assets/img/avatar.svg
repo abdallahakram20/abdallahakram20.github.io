@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" fill="#111927"/>
+  <rect x="6" y="6" width="188" height="188" fill="none" stroke="#1c2836" stroke-width="1"/>
+  <path d="M6 6h20M6 6v20" stroke="#4cc9f0" stroke-width="2" fill="none"/>
+  <path d="M194 6h-20M194 6v20" stroke="#4cc9f0" stroke-width="2" fill="none"/>
+  <path d="M6 194h20M6 194v-20" stroke="#4cc9f0" stroke-width="2" fill="none"/>
+  <path d="M194 194h-20M194 194v-20" stroke="#4cc9f0" stroke-width="2" fill="none"/>
+  <text x="100" y="120" font-family="monospace" font-size="64" fill="#4cc9f0" text-anchor="middle" opacity="0.85">AA</text>
+</svg>

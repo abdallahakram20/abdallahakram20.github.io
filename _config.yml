@@ -1,0 +1,56 @@
+title: Abdallah Akram
+description: "Offensive security notes & Hack The Box write-ups"
+logo_img: "/assets/img/avatar.svg"
+profile_img: "/assets/img/avatar.svg"
+
+# Social Links
+email:
+github_username: abdallahakram20
+twitter_username:
+instagram_username:
+linkedin_username:
+facebook_username:
+
+# External API
+# Comments are OFF until you create your own giscus app at https://giscus.app
+# (the values below were the original theme author's — do not reuse them).
+giscus_repo:
+giscus_repoId:
+giscus_category:
+giscus_categoryId:
+# Visitor counter OFF until you create your own account at https://www.goatcounter.com
+goatcounter_code:
+google_analytics:
+
+# If your repo name follows the format "<user-name>.github.io", then leave the below blank.
+# Otherwise, set its value as "/<repo-name>". ex) baseurl: /myblog
+baseurl:
+
+# Build settings
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-loading-lazy
+
+exclude:
+  - docs/
+
+collections:
+  pages:
+    output: true
+    permalink: /:path.html
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+      date: "1900-01-01"
+
+# Markdown newline activator
+kramdown:
+  input: GFM
+  hard_wrap: true
