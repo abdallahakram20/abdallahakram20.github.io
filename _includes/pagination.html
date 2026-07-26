@@ -1,6 +1,21 @@
 {%- assign list_pages = site.pages | sort:"date" | reverse -%}
 {%- assign post_counts = 0 -%}
 
+{%- if page.url == "/Write-ups/" -%}
+    {%- assign writeup_pages = site.pages | where_exp: "p", "p.path contains '_pages/Write-ups/' and p.path != '_pages/Write-ups/index.md'" -%}
+    {%- assign writeup_pages = writeup_pages | sort: 'title' -%}
+    <div class="writeups-dropdown">
+        <label for="writeup-select">اختر رايتب</label>
+        <select id="writeup-select" onchange="if(this.value){window.location=this.value}">
+            <option value="">-- اختر رايتب --</option>
+            {%- for sub_page in writeup_pages -%}
+                {%- assign page_title = sub_page.title | default: sub_page.path | remove: '_pages/Write-ups/' | remove: '.md' -%}
+                <option value="{{ sub_page.url | prepend: site.baseurl }}">{{ page_title }}</option>
+            {%- endfor -%}
+        </select>
+    </div>
+{%- endif -%}
+
 <h1 class="category-header">
     {% if page_level == 1 %}
         All Posts
