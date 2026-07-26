@@ -19,10 +19,10 @@ permalink: /Write-ups/the-puppet-master.html
 The scenario frames the player as an analyst reviewing evidence submitted by a field source, but the actual skill being tested is a transferable one: turning a photo into a confirmed identity through careful, source-checked research rather than guesswork.
 
 ![Investigation platform evidence page](/assets/img/writeups/puppet-master/evidence-page.png)
-_Caption (EN): The evidence page as presented on the investigation platform._
+_The evidence page as presented on the investigation platform._
 
 ![Evidence assessment / dashboard](/assets/img/writeups/puppet-master/evidence-assessment.png)
-_Caption (EN): The platform's evidence assessment view, listing confirmed visual elements and the investigation vectors required to solve the challenge._
+_The platform's evidence assessment view, listing confirmed visual elements and the investigation vectors required to solve the challenge._
 
 ---
 
@@ -38,6 +38,7 @@ This challenge has no technical exploitation component, so the approach below is
 ![Evidence photo — confirmed vehicle](/assets/img/writeups/puppet-master/bushmaster-front-view.jpg)
 **The evidence photo used as the starting point for the reverse-image search.**
 
+
 ---
 
 ## 3. Confirmed Identity
@@ -49,15 +50,16 @@ This challenge has no technical exploitation component, so the approach below is
 - **Type:** Infantry Mobility Vehicle
 
 ![Wikipedia infobox reference](/assets/img/writeups/puppet-master/wikipedia-infobox.png)
-_Caption (EN): Public reference entry confirming the vehicle's identity and service history._
+_Public reference entry confirming the vehicle's identity and service history._
 
 ### 3.1 Supporting Cross-References
 
 ![NZ Army official equipment page](/assets/img/writeups/puppet-master/nzarmy-bushmaster-page.jpg)
-_Caption (EN): An operator's official equipment page (New Zealand Army) describing the same vehicle in public service._
+_An operator's official equipment page (New Zealand Army) describing the same vehicle in public service._
 
 ![Public specifications reference](/assets/img/writeups/puppet-master/wikipedia-specs-table.png)
-_Caption (EN): Publicly documented technical specifications used to cross-check the identification._
+_Publicly documented technical specifications used to cross-check the identification._
+
 
 ---
 
@@ -76,6 +78,7 @@ This is a conceptual description of the artifact type used in the challenge, not
 
 No private, personal, or sensitive data is involved anywhere in this challenge — every fact used to solve it is drawn from openly published, public-domain reference material.
 
+
 ---
 
 ## 5. Deriving the Flag — Conceptual Method
@@ -86,12 +89,14 @@ Rather than walking through the specific answer, here's the reasoning pattern th
 - **Metadata triangulation:** treating each independently confirmed spec (origin country, manufacturer, in-service date, capacity figures) as one data point, and only trusting a fact once it appears consistently across more than one independent public source.
 - **Format assembly:** once every required field is independently confirmed, assembling them in the exact structure/casing the challenge specifies (this challenge is picky about exact formatting — re-read the submission instructions carefully before submitting).
 
+
 ---
 
 ## 6. Completion Confirmation
 
 ![Challenge solved confirmation](/assets/img/writeups/puppet-master/pwned-success.png)
 "The Puppet Master has been Pwned" — confirmation screen after submitting the correct flag.\_
+
 
 ---
 
