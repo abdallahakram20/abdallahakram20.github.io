@@ -77,8 +77,24 @@
         </li>
 
         <li class="nav-section" aria-label="Pages">
-          <div class="nav-section-title">Pages</div>
-          <ul class="nav-list nav-pages-list">
+          <button
+            type="button"
+            class="nav-section-toggle"
+            aria-expanded="false"
+            aria-controls="pages-list"
+          >
+            <span class="nav-section-title">Pages</span>
+            <svg
+              class="nav-section-arrow"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512"
+            >
+              <path
+                d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"
+              />
+            </svg>
+          </button>
+          <ul class="nav-list nav-pages-list collapsed" id="pages-list">
             {%- assign writeup_pages = site.pages | where_exp: "p", "p.path contains '_pages/Write-ups/'" -%}
             {%- assign writeup_pages = writeup_pages | where_exp: "p", "p.path != '_pages/Write-ups/index.md'" -%}
             {%- assign writeup_pages = writeup_pages | sort: 'title' -%}
