@@ -75,6 +75,18 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     });
 
+    // navigation (toggle Pages section)
+    var pagesToggle = document.querySelector('.nav-section-toggle');
+    var pagesList = document.getElementById('pages-list');
+
+    if (pagesToggle && pagesList) {
+        pagesToggle.addEventListener('click', function() {
+            var expanded = pagesToggle.getAttribute('aria-expanded') === 'true';
+            pagesToggle.setAttribute('aria-expanded', String(!expanded));
+            pagesList.classList.toggle('collapsed', expanded);
+        });
+    }
+
     document.querySelectorAll('.nav-item').forEach((nav_item) => {
         if (nav_item.parentNode.classList.contains('active')){
             nav_item.classList.add('selected');
