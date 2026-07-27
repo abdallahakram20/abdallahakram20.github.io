@@ -64,10 +64,56 @@
   color: #4a4a4a;
 }
 
+.nav-section-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0 0 0.5rem;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+
+  .nav-section-title {
+    margin: 0;
+  }
+
+  .nav-section-arrow {
+    width: 12px;
+    height: 12px;
+    fill: currentColor;
+    flex-shrink: 0;
+    transition: transform 0.3s;
+  }
+
+  &[aria-expanded="false"] .nav-section-arrow {
+    transform: rotate(-90deg);
+  }
+
+  &:hover {
+    color: $color-darkorange;
+  }
+}
+
 .nav-pages-list {
   padding: 0;
   margin: 0;
   list-style: none;
+  overflow: hidden;
+  max-height: 768px;
+  opacity: 1;
+  transition:
+    max-height 0.4s ease-in-out,
+    opacity 0.3s;
+
+  &.collapsed {
+    max-height: 0;
+    opacity: 0;
+  }
 }
 
 .nav-page-item .nav-item {
