@@ -79,13 +79,12 @@
         <li class="nav-section" aria-label="Pages">
           <div class="nav-section-title">Pages</div>
           <ul class="nav-list nav-pages-list">
-            {%- assign writeup_pages = site.pages | where_exp: "p", "p.path
-            contains '_pages/Write-ups/' and p.path !=
-            '_pages/Write-ups/index.md'" -%} {%- assign writeup_pages =
-            writeup_pages | sort: 'title' -%} {%- for p in writeup_pages -%} {%-
-            assign page_title = p.title | default: p.path -%} {%- assign
-            page_title = page_title | remove: '_pages/Write-ups/' | remove:
-            '.md' -%}
+            {%- assign writeup_pages = site.pages | where_exp: "p", "p.path contains '_pages/Write-ups/'" -%}
+            {%- assign writeup_pages = writeup_pages | where_exp: "p", "p.path != '_pages/Write-ups/index.md'" -%}
+            {%- assign writeup_pages = writeup_pages | sort: 'title' -%}
+            {%- for p in writeup_pages -%}
+            {%- assign page_title = p.title | default: p.path -%}
+            {%- assign page_title = page_title | remove: '_pages/Write-ups/' | remove: '.md' -%}
             <li class="nav-page-item" aria-label="{{ page_title }}">
               <div class="nav-item">
                 <a
