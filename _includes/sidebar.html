@@ -95,7 +95,7 @@
             </svg>
           </button>
           <ul class="nav-list nav-pages-list collapsed" id="pages-list">
-            {%- assign writeup_pages = site.pages | where_exp: "p", "p.path contains '_pages/Write-ups/'" -%}
+            {%- assign writeup_pages = site.collections['pages'].docs | where_exp: "p", "p.path contains '_pages/Write-ups/'" -%}
             {%- assign writeup_pages = writeup_pages | where_exp: "p", "p.path != '_pages/Write-ups/index.md'" -%}
             {%- assign writeup_pages = writeup_pages | sort: 'title' -%}
             {%- for p in writeup_pages -%}
