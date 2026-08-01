@@ -37,6 +37,29 @@ _The `/api/options` response: numbered stages (`"1"`, `"2"`, `"3"`, `"4"`) map t
 
 ---
 
+## 2.1 Doing It the Proxy Way (Burp Suite)
+
+The same discovery works just as well through an intercepting proxy instead of the browser's own DevTools — and it's worth walking through, since it's a good habit-building exercise on its own.
+
+1. **Route the browser's traffic through Burp's Proxy** and just let the app load normally. Burp's **Target → Site map** passively builds a tree of every endpoint the page touches as you use it.
+
+![Burp Suite Target site map showing the /api/options endpoint](/assets/img/writeups/flag-command/burp-target-sitemap-options.png)
+_The Site map surfaces `/api/options` as a distinct JSON endpoint alongside the static JS/CSS assets — a good example of how a proxy gives you a full inventory of an app's surface, not just what you happened to click on._
+
+2. **Send that request to Repeater** so it can be replayed and re-inspected on its own, independent of the game's actual state. This is the useful part of Repeater: you're no longer at the mercy of the terminal's UI timing — you can hit the endpoint whenever you want and pick the response apart at leisure.
+
+![Burp Repeater showing the JSON response with the secret key highlighted in the Inspector](/assets/img/writeups/flag-command/burp-repeater-response-secret.png)
+_Repeater's response pane plus the Inspector panel makes the extra `"secret"` array easy to isolate and copy cleanly — no need to eyeball raw JSON in a cramped DevTools pane._
+
+3. **Take the string value found in that field and feed it back into the terminal** in the actual browser tab, exactly as the game expects input.
+
+![The secret command typed into the browser terminal, returning the flag](/assets/img/writeups/flag-command/browser-terminal-flag-captured.png)
+_Same result as before, just reached via a different tool — the flag pops out once the hidden command is submitted through the game's normal input._
+
+The DevTools Network tab and Burp's Proxy/Repeater are solving the exact same problem here — the point of running it through Burp as well is the workflow itself: passive proxying to map an app's endpoints, Repeater to isolate and replay a specific request without disturbing app state, and the Inspector panel to pull a value out cleanly. That's the same loop used on far less trivial targets, so it's worth practicing even on a "very easy" challenge like this one.
+
+---
+
 ## 3. The Core Idea Behind the Challenge
 
 - The visible game only ever shows you `HEAD NORTH / SOUTH / EAST / WEST` and similar branching prompts — a normal player would spend their time trying every visible combination of those.
