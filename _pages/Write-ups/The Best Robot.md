@@ -19,9 +19,28 @@ permalink: /Write-ups/the-best-robot.html
 
 ---
 
-## 2. Checking robots.txt First
+## 2. Step 1 — Inspecting the Landing Page
 
-Before touching anything else, I routed the browser through **Burp Suite's Proxy** and requested `robots.txt` directly from Repeater — it costs nothing to check and it's one of the first things worth ruling out on any target, CTF or real-world.
+Before touching anything else, I routed the browser through **Burp Suite's Proxy** and requested the root path to see exactly what the server sends back, not just what renders visually:
+
+```
+GET / HTTP/1.1
+Host: 682081b3-5bee-4c40-a7dd-5aab379711a4.challs.scriptsorcerers.xyz
+```
+
+The rendered page itself was empty, but reading the raw HTML response in Burp — rather than just what the browser displays — turned up an HTML comment left in the source:
+
+```html
+<!-- Developers: Visit /the-best-robot for a surprise! -->
+```
+
+That's the actual discovery moment: a comment that never shows up on the rendered page but sits right there in the response body for anyone who reads the source instead of just the screen.
+
+---
+
+## 3. Step 2 — Confirming via robots.txt
+
+Checking `/robots.txt` is something I do on **every** web target as a first-step habit, regardless of whether I already have a lead — it costs one request and regularly surfaces paths nobody linked anywhere. In this case it also happened to line up with, and confirm, the comment from Step 1:
 
 ```
 GET /robots.txt HTTP/1.1
@@ -29,15 +48,15 @@ Host: 682081b3-5bee-4c40-a7dd-5aab379711a4.challs.scriptsorcerers.xyz
 ```
 
 ![Burp Repeater showing the robots.txt response disallowing /the-best-robot](/assets/img/writeups/the-best-robot/robots-txt-response.png)
-_The response comes back with a `Disallow` rule pointing straight at `/the-best-robot` — the site is explicitly telling crawlers not to index a path that isn't linked anywhere on the page itself._
+_The response comes back with a `Disallow` rule pointing at `/the-best-robot` — the exact same path hinted at in the HTML comment, now confirmed from a second, independent source._
 
-That single line is the whole challenge, really: a path that was never meant to be *found by browsing*, only excluded from search indexing — which of course means a human (or a proxy) can still request it directly.
+Two unrelated places on the same target pointing at the same path is a strong enough signal to go request it directly.
 
 ---
 
-## 3. Requesting the Disallowed Path
+## 4. Step 3 — Requesting the Disallowed Path
 
-With the path in hand, I sent a plain GET request to it from Repeater:
+With the path confirmed twice over, I sent a plain GET request to it from Repeater:
 
 ```
 GET /the-best-robot HTTP/1.1
@@ -53,16 +72,17 @@ scriptCTF{r0b07s_4r3_t4k1ng_0v3r_52711980a099}
 
 ---
 
-## 4. The Core Idea Behind the Challenge
+## 5. The Core Idea Behind the Challenge
 
-- `robots.txt` is a **convention for crawlers**, not an access control mechanism. `Disallow` only asks well-behaved bots not to index a path — it does nothing to prevent a request from actually reaching it.
-- Listing a sensitive or unlinked path in `robots.txt` is a classic way to accidentally advertise its existence to anyone who bothers to check the file, which is exactly the opposite of what teams usually intend when they add entries to it.
-- The challenge's name is itself a hint — "the best robot" plays directly on "robots.txt", which is a nice reminder that CTF titles are often worth reading as clues, not just flavor text.
+- The rendered page is not the full response. Browsers hide HTML comments from the visible page, but an intercepting proxy (or plain view-source) shows the raw body exactly as the server sent it — that's where the first lead was.
+- `robots.txt` is a **convention for crawlers**, not an access control mechanism. `Disallow` only asks well-behaved bots not to index a path — it does nothing to prevent a request from actually reaching it. Here it doubled as free confirmation of a path I already suspected.
+- The challenge's name is itself a hint — "the best robot" plays directly on "robots.txt", a reminder that CTF titles are often worth reading as clues, not just flavor text.
 
 ---
 
-## 5. Key Takeaways
+## 6. Key Takeaways
 
-- **Always check `robots.txt` and `sitemap.xml` early in recon** — before automated scanning, before fuzzing, they take seconds to request and regularly leak paths nobody linked anywhere.
-- **`Disallow` is not a security boundary.** Anything listed there should be treated as a path that needs its own proper authorization check on the server side — if it doesn't have one, it's exposed to anyone who reads the file.
-- **Simple challenges test discipline, not skill.** This one didn't need Intruder, fuzzing, or any exploit — just following the standard recon checklist in order instead of assuming an empty page means there's nothing to find.
+- **Read the raw response, not just the rendered page.** HTML comments, unused JS variables, and debug markup routinely leak information that never reaches the visible UI.
+- **Check `robots.txt` and `sitemap.xml` on every target as a standing habit** — before automated scanning, before fuzzing. They take seconds to request and sometimes independently confirm a lead you already have.
+- **`Disallow` is not a security boundary.** Anything listed there should have its own proper authorization check on the server side — if it doesn't, it's exposed to anyone who reads the file.
+- **Corroborate leads from more than one source when you can.** Finding the same path hinted at from two unrelated places (a comment and a robots rule) is a good signal it's worth pursuing before you request it.
