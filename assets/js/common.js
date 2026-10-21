@@ -243,6 +243,8 @@ function searchPost(pages){
             if (highlighted_path === '')
                 highlighted_path = "Home";
     
+            var safe_url = sanitizeUrl(matchedPosts[i].url);
+
             if (matchedPosts[i].type === 'post'){
                 var highlighted_title = highlightKeyword(matchedPosts[i].title, keyword);
                 var highlighted_tags = highlightKeyword(matchedPosts[i].tags, keyword);
@@ -251,17 +253,17 @@ function searchPost(pages){
                     highlighted_tags = "none";
 
                 insertItem('<a href="' +
-                    matchedPosts[i].url +
+                    safe_url +
                     '"><table><thead><tr><th><svg class="ico-book"></svg></th><th>' + highlighted_title +  
                     '</th></tr></thead><tbody><tr><td><svg class="ico-folder"></svg></td><td>' + highlighted_path +
                     '</td></tr><tr><td><svg class="ico-tags"></svg></td><td>' + highlighted_tags +
-                    '</td></tr><tr><td><svg class="ico-calendar"></svg></td><td>' + matchedPosts[i].date +
+                    '</td></tr><tr><td><svg class="ico-calendar"></svg></td><td>' + escapeHtml(matchedPosts[i].date) +
                     '</td></tr></tbody></table></a>'
                 );
             }
             else {
                 insertItem('<a href="' +
-                    matchedPosts[i].url +
+                    safe_url +
                     '"><table><thead><tr><th><svg class="ico-folder"></svg></th><th>' + highlighted_path + 
                     '</th></tr></thead></table></a>'
                 );
@@ -280,15 +282,34 @@ function searchPost(pages){
         var index = txt.toLowerCase().lastIndexOf(keyword);
     
         if (index >= 0) { 
-            out = txt.substring(0, index) + 
+            out = escapeHtml(txt.substring(0, index)) + 
                 "<span class='highlight'>" + 
-                txt.substring(index, index+keyword.length) + 
+                escapeHtml(txt.substring(index, index+keyword.length)) + 
                 "</span>" + 
-                txt.substring(index + keyword.length);
+                escapeHtml(txt.substring(index + keyword.length));
             return out;
         }
     
-        return txt;
+        return escapeHtml(txt);
+    }
+
+    function escapeHtml(str) {
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    function sanitizeUrl(url) {
+        var value = String(url);
+
+        if (/^(https?:)?\/\//i.test(value) || /^[./#]/.test(value)) {
+            return escapeHtml(value);
+        }
+
+        return '#';
     }
 }
 
